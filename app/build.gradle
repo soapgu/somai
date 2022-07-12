@@ -43,4 +43,5 @@ dependencies {
     // CameraX View class
     implementation "androidx.camera:camera-view:1.0.0-alpha26"
     implementation "com.orhanobut:logger:2.2.0"
+    implementation files("libs/board_comm-release.aar")
 }

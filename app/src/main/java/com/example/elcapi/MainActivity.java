@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Surface;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -63,8 +64,10 @@ public class MainActivity extends AppCompatActivity {
             });
 
         } );
+        //AlienJJ156.AlienJJ_RedLED();
         //AlienJJ156.AlienJJ_GreedLED();
         //AlienJJ156.AlienJJ_YellowLED();
+        Alien22Util.offRedLed();
         checkPermissions();
     }
 
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         //initVideoView();
         //initEvent();
+        mPreviewView.setScaleX(-1F);
         initCamera();
         startPreview();
     }
@@ -101,8 +105,9 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("RestrictedApi")
     private void initCamera() {
         mCameraFuture = ProcessCameraProvider.getInstance(this);
-        mCameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA;
+        mCameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
         mPreview = new Preview.Builder()
+                .setTargetRotation(Surface.ROTATION_180)
                 .build();
         mPreview.setSurfaceProvider(mPreviewView.getSurfaceProvider());
 
@@ -112,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
          */
         imageCapture =
                 new ImageCapture.Builder()
-                        //.setTargetRotation( this.getDisplay().getRotation() )
+                        .setCaptureMode( ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY )
                         .build();
 
         try {
